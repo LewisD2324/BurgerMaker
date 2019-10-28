@@ -7,7 +7,7 @@ import Button from "../../UI/Button/Button";
 interface OrderSummaryPropTypes {
   ingredients: IngredientsType;
   purchaseCancelHandler(): void;
-  // purchaseContinueHandler(): void;
+  purchaseContinueHandler(): void;
   price: number;
 }
 
@@ -37,7 +37,9 @@ class OrderSummary extends Component<OrderSummaryPropTypes> {
         <Button btnType="Danger" onClick={this.props.purchaseCancelHandler}>
           Cancel
         </Button>
-        <Link to="/checkout">Continue</Link>
+        <Button btnType="Success" onClick={this.props.purchaseContinueHandler}>
+          Continue
+        </Button>
       </Aux>
     );
   }

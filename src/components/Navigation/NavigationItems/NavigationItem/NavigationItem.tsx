@@ -1,9 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import classes from "./navigationitem.module.css";
 
 interface NavigationitemPropTypes {
   children?: React.ReactNode;
-  active: boolean;
+  //active: boolean;
 
   link: string;
 }
@@ -11,12 +12,9 @@ interface NavigationitemPropTypes {
 const navigationitem = (props: NavigationitemPropTypes) => (
   <ul>
     <li className={classes.Navigationitem}>
-      <a
-        href={props.link}
-        className={props.active ? classes.active : undefined}
-      >
+      <NavLink to={props.link} exact activeClassName={classes.active}>
         {props.children}
-      </a>
+      </NavLink>
     </li>
   </ul>
 );

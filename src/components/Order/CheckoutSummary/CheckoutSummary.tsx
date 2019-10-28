@@ -2,7 +2,6 @@ import React from "react";
 import Burger from "../../Burger/Burger";
 import Button from "../../UI/Button/Button";
 import classes from "./checkoutsummary.module.css";
-import { Link } from "react-router-dom";
 
 const checkoutSummary = (props: any) => {
   return (
@@ -11,8 +10,12 @@ const checkoutSummary = (props: any) => {
       <div style={{ width: "100%", margin: "auto" }}>
         <Burger ingredients={props.ingredients} />
       </div>
-      <Link to="/">CANCEL</Link>
-      <Link to="/checkout/contact-data">CONTINUE</Link>
+      <Button btnType="Danger" onClick={props.checkoutCancelled}>
+        CANCEL
+      </Button>
+      <Button btnType="Success" onClick={props.checkoutContinued}>
+        CONTINUE
+      </Button>
     </div>
   );
 };

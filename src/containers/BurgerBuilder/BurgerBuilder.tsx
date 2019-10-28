@@ -38,7 +38,11 @@ interface BurgerMakerState {
   loading: boolean;
   error?: string;
 }
-class BurgerBuilder extends Component {
+
+export interface IProps {
+  history: any[];
+}
+class BurgerBuilder extends Component<IProps> {
   // constructor(props)
   // {
   //   super(props);
@@ -124,35 +128,23 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: false });
   };
 
-  // purchaseContinueHandler = () => {
-  //   this.setState({ loading: true });
-  //   const order = {
-  //     ingredients: this.state.ingredients,
-  //     price: this.state.totalPrice,
-  //     customer: {
-  //       name: "lewis",
-  //       address: {
-  //         street: "test 1",
-  //         postcode: "Da3 8sf",
-  //         country: "UK"
-  //       },
-  //       email: "test@test.com"
-  //     },
-  //     deliveryMethod: "fastest"
-  //   };
-  //   axios
-  //     .post("/orders.json", order)
-  //     .then(response => {
-  //       this.setState({ loading: false, purchasing: false });
-  //     })
-  //     .catch(error => {
-  //       this.setState({ loading: false, purchasing: false });
-  //     });
-  //   this.props.history.push();
-  //   return <Redirect to="/checkout" />;
-  //   console.log("test");
-  //  <Link to="/checkout" />;
-  // };
+  purchaseContinueHandler = () => {
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    queryParams.push('price' + this.state.totalPrice);
+    const queryString = queryParams.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString
+    });
+    //   return <Redirect to="/checkout" />;
+  };
   render() {
     //disables buttons and sets state values to 0
     const disabledInfo: any = {
@@ -191,7 +183,7 @@ class BurgerBuilder extends Component {
           ingredients={this.state.ingredients}
           price={this.state.totalPrice}
           purchaseCancelHandler={this.purchaseCancelHandler}
-          //  purchaseContinueHandler={this.purchaseContinueHandler}
+          purchaseContinueHandler={this.purchaseContinueHandler}
         />
       );
     }

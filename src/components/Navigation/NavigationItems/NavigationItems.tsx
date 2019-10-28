@@ -8,12 +8,8 @@ interface NavigationItemsPropTypes {
 
 const navigationitems = (props: NavigationItemsPropTypes) => (
   <ul className={classes.Navigationitems}>
-    <NavigationItem link="/" active={true}>
-      Burger Builder
-    </NavigationItem>
-    <NavigationItem link="/" active={false}>
-      Checkout
-    </NavigationItem>
+    <NavigationItem link="/">Burger Builder</NavigationItem>
+    <NavigationItem link="/orders">Orders</NavigationItem>
   </ul>
 );
 
